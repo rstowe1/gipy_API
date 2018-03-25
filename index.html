@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>GIPHY api</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  
+</head>
+<body>
+<!--Header that holds the GIPHY buttons-->
+<div  class="jumbotron">
+  <h2 style="text-align: center;"><strong>GIPHYs Can Still be Funny</strong></h2>
+  
+</div>
+  <div  class="row">
+    <!--Pannels to hold the API Display and the submission (Maybe)form...-->
+    <!--Content Display Area-->
+    <div class="container">
+      <div class="col-sm-3">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3>GIPHYs To Check out</h3>
+          </div>
+          <div class="panel-body" id="giphySearches">
+                        
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+          <h3>Results</h3>
+          </div>
+          <div class="panel-body">
+            <div  id="displayButtons">
+  
+            </div>
+          </div>
+          
+        </div>
+      </div>
+      <!--Additional GIPHY Search Form-->
+      <div class="col-sm-3" id="searchForm">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <form id="GIPHY-Search" style="align-content:right;">
+              <h3 style="text-align: center;"><strong>New Giphy Search</strong></h3>
+          </div>
+          <div class="panel-body">
+              <div class="form-group">
+                <label for="search-input">New GIPHY Search here</label>
+                <input type="text" id="search-input"></input>
+              </div>
+              <input id="newGif" type="submit" value="newGif" class="btn btn-primary">
+              <input id="nixGif" type="submit" value="nixGif" class="btn btn-primary">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<!--JQuery CDN-->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+crossorigin="anonymous"></script>
+<!--BootStrap CDN-->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!--JavaScript Relative Link-->
+<script src="./assets/javascript/logic.js"></script>
+</body>
+</html>
