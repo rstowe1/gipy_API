@@ -2,7 +2,8 @@
 $(document).ready(function () {
 
 
-  gifSearch = ['trending', 'funny', 'ouch', 'dumb dogs', 'cats', 'dogs', 'Bassett Hound'];
+  var gifSearch = ['trending', 'funny', 'ouch', 'dumb dogs', 'cats', 'dogs', 'Bassett Hound'];
+
 
   $('#search-input').on('click focusin', function () {
     this.value = '';
@@ -43,65 +44,59 @@ $(document).ready(function () {
   }
 
   return mkButtons();
-});
 
-// function printGifs() {
-//   var lookItUp = $(this).attr('data-name');
-//   var apiKeys = ()
-//
-// }
 
 // from here, I am trying to call the data from the API
-function printGifs() {
-  var lookItUp = $(this).attr('data-name');
-  var apiKey = 'http://api.giphy.com/v1/gifs/search?q=' + lookItUp + '&api_key=3KfFlY9qMiR9dTwVrNy3k6EeBolnRrH2&limit=10';
-  // apiKey.done(function (data) {
-  //   console.log("success got data", data);
-  // });
-  $.ajax({
-    url: apiKey,
-    method: 'GET'
-  })
-    .end(function (tester) {
-      console.log(tester);
+  function prntGifs() {
+    var lookItUp = $(this).attr('data-name');
+    var host = 'http://api.giphy.com/v1/gifs/search?q=';
+    var key = '3KfFlY9qMiR9dTwVrNy3k6EeBolnRrH2';
+    var lim = '&limit=10';
+    var apiKey = host + lookItUp + key + lim;
+    $.ajax({
+      url: apiKey,
+      method: 'GET'
+    })
+
+    apiKey.done(function (data) {
+      console.log("success got data", data);
       $('#gifImages').empty();
-      var gdImages = tester.data;
-      if (gdImages !== '' || 0) {
-        console.log(gdImages);
+      var gdImages = data.data;
+      if (gdImages === '' || 0) {
+        alert('well, Damn theres nothing there!')
       }
       for (var i = 0; i < gdImages.length; i++) {
         var imgPrint = $('<div>');
         imgPrint.addClass('imgPrint');
 
+        var prntRating = $('<p>').text('Rating ' + gdImages[i].rating);
+        imgPrint.append(gifRating);
         var images = $('<img>');
-        images.attr('src', gdImages[i].images.fixed_height_still.url);
-        images.attr('data-still',gdImages[i].images.fixed_height_still.url);
-        images.attr('data-animate',gdImages[i].images.fixed_height_still.url);
+        images.attr('src', apiKey[i].images.fixed_height_still.url);
+        images.attr('data-still', apiKey[i].images.fixed_height_still.url);
+        images.attr('data-animate', apiKey[i].images.fixed_height_still.url);
         images.attr('data-state', 'still');
         images.addClass('gif');
-        $('#gifImages').append(imgPrint);
+        imgPrint.append(prntRating);
+        ('#gifImages').append(imgPrint)
       }
     });
-}
 
-$(document).on('click','lookItUp',printGifs);
-$(document).on('click','.image',function () {
-  var state = $(this).attr('data-state');
+    $(document).on('click', '.lookItUp', prntGifs);
+    $(document).on('click', '.image', function () {
+      var state = $(this).attr('data-state');
 
-  if (state === 'still') {
-    $(this).attr('src', $(this).data('animate'));
-    $(this).attr('data-state', 'animate');
-  } else {
-    $(this).attr('src'.data('still'));
-    $(this).attr('data-state', 'still');
+      if (state === 'still') {
+        $(this).attr('src', $(this).data('animate'));
+        $(this).attr('data-state', 'animate');
+      } else {
+        $(this).attr('src', $(this).data('still'));
+        $(this).attr('data-state', 'still');
+      }
+    });
+    // return prntGifs();
+
   }
+
+
 });
-
-
-
-
-
-
-
-
-
