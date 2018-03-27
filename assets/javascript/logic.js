@@ -26,7 +26,7 @@ $(document).ready(function () {
     gifSearch.splice($.inArray(remSearch, gifSearch), 1);
     $('#search-input').val("");
 
-    return mkButtons()
+    return mkButtons();
   });
 
   function mkButtons() {
@@ -56,12 +56,12 @@ $(document).ready(function () {
     $.ajax({
       url: apiKey,
       method: 'GET'
-    })
+    });
 
-    apiKey.done(function (data) {
-      console.log("success got data", data);
+    apiKey.done(function (response) {
+      console.log("success got data", response);
       $('#gifImages').empty();
-      var gdImages = data.data;
+      var gdImages = response.data;
       if (gdImages === '' || 0) {
         alert('well, Damn theres nothing there!')
       }
@@ -70,9 +70,10 @@ $(document).ready(function () {
         imgPrint.addClass('imgPrint');
 
         var prntRating = $('<p>').text('Rating ' + gdImages[i].rating);
-        imgPrint.append(gifRating);
+        imgPrint.append(prntRating);
         var images = $('<img>');
         images.attr('src', apiKey[i].images.fixed_height_still.url);
+        images.attr('alt', apiKey[i].images.fixed_height_still.url);
         images.attr('data-still', apiKey[i].images.fixed_height_still.url);
         images.attr('data-animate', apiKey[i].images.fixed_height_still.url);
         images.attr('data-state', 'still');
@@ -94,7 +95,7 @@ $(document).ready(function () {
         $(this).attr('data-state', 'still');
       }
     });
-    // return prntGifs();
+
 
   }
 
